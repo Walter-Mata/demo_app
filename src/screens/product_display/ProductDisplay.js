@@ -25,7 +25,10 @@ const ProductDisplay=({route,navigation})=>{
             headerRight: () => (
                 <Fragment> 
                 <View style={{width:40,alignItems:'flex-end'}}>
-                        <Badge style={{position:'absolute'}}>{
+                     
+                        <Badge 
+                        visible={cart.cartItems.length>0?true:false}
+                        style={{position:'absolute'}}>{
                         cart.cartItems.length}</Badge>
                     <IconButton
                         icon='cart-outline'
@@ -42,8 +45,9 @@ const ProductDisplay=({route,navigation})=>{
     },[navigation,cart])
 
     const gotoCartItems=()=>{
-        // navigation.navigate('CapitalCare_Cart');    
-     }
+        navigation.navigate('Cart')
+    }
+    
 
 const addToCart=()=>{
    dispatch({
@@ -52,9 +56,11 @@ const addToCart=()=>{
         cart_id:uuid.v4(),
         productName:productName,
         description:description,
+        checkout:false,
         uri:uri,
+        quantity:1,
         original_price:original_price,
-        quantity:1
+        quantity_price:original_price
     }
    })
 }

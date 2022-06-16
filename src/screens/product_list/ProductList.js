@@ -1,23 +1,30 @@
 import React,{useLayoutEffect,Fragment} from 'react';
 import { SafeAreaView,View, FlatList } from 'react-native';
-import {useTheme,IconButton} from 'react-native-paper';
+import {useTheme,IconButton,Badge} from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import Product from '../../components/Product/';
 import {  productList_FlowerStore
  } from '../../repository/config.data/dummyData';
 
 
 const ProductList=({route,navigation})=>{
-   // const { title} = route.params!=undefined?route.params:'';
+  
     const theme=useTheme();
+    const {cart}=useSelector(state=>state)
+    const dispatch=useDispatch();
 
-    const gotoCartItems=()=>{
+  
+    
 
-    }
     useLayoutEffect(()=>{
         navigation.setOptions({
             headerRight: () => (
                 <Fragment> 
                 <View style={{width:40,alignItems:'flex-end'}}>
+                <Badge 
+                visible={cart.cartItems.length>0?true:false}
+                style={{position:'absolute'}}>{
+                        cart.cartItems.length}</Badge>
                     <IconButton
                         icon='cart-outline'
                         iconButtonStyle={{
@@ -31,7 +38,10 @@ const ProductList=({route,navigation})=>{
 ),
         })
     },[navigation])
-
+    
+    const gotoCartItems=()=>{
+        navigation.navigate('Cart')
+    }
     const goToProductDisplay=(item)=>{
         //navigation.navigate('ProductDisplay');
        navigation.navigate('ProductDisplay',{

@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
 import ProductList from './screens/product_list/ProductList';
 import ProductDisplay from './screens/product_display/ProductDisplay';
+import Cart from './screens/cart/Cart';
 import { Provider as PaperProvider } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import redux from './redux';
@@ -21,6 +22,7 @@ const App = ({}) => {
         <Stack.Navigator initialRouteName='ProductList'>
         <Stack.Screen name="ProductList" component={ProductList} />
         <Stack.Screen name="ProductDisplay" component={ProductDisplay} />
+        <Stack.Screen name="Cart" component={Cart} />
       </Stack.Navigator>
 
         </NavigationContainer>
